@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-8a#z*7t94(=l9pne-+%5b-uv^ao)ly_7fd3o)k4six$84&(ll1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -136,5 +136,8 @@ FORM_RENDERER = 'django.forms.renderers.DjangoDivFormRenderer'
 
 LOGOUT_REDIRECT_URL = 'index'
 
-
+try:
+    from local_settings import *
+except ImportError:
+    pass
 
