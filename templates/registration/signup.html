@@ -1,0 +1,47 @@
+{% extends 'core/base.html' %}
+{% block title %}Signup{% endblock %}
+{% load widget_tweaks %}
+{% block content %}
+        <div class="flex justify-center items-center mt-5">
+        <form method="post" action="{% url 'signup' %}">
+            {% csrf_token %}
+            <div class="bg-gray-100 rounded p-6 shadow-sm">
+                {% if form.errors %}
+                    <div class="grid grid-cols-1">
+                        <p class="text-red-700">Error, try again!</p>
+                    </div>
+                {% endif %}
+                <div class="grid grid-cols-1">
+                    <div class="pt-2 pb-1 text-gray-700">{{ form.email|add_label_class:"" }}</div>
+                    <div class="pb-2">{{ form.email|add_class:"bg-white rounded-sm w-80 text-gray-700" }}</div>
+                    {% if form.email.errors %}
+                        {% for error in form.email.errors %}
+                            <div class="pb-2 text-red-700">{{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="grid grid-cols-1">
+                    <div class="pt-2 pb-1 text-gray-700">{{ form.password1|add_label_class:"" }}</div>
+                    <div class="pb-2">{{ form.password1|add_class:"bg-white rounded-sm w-80 text-gray-700" }}</div>
+                    {% if form.password1.errors %}
+                        {% for error in form.password1.errors %}
+                            <div class="pb-2 text-red-700">{{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="grid grid-cols-1">
+                    <div class="pt-2 pb-1 text-gray-700">{{ form.password2|add_label_class:"" }}</div>
+                    <div class="pb-2">{{ form.password2|add_class:"bg-white rounded-sm w-80 text-gray-700" }}</div>
+                    {% if form.password2.errors %}
+                        {% for error in form.password2.errors %}
+                            <div class="pb-2 text-red-700">{{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="flex justify-center items-center mt-3">
+                    <input class="p-3 bg-indigo-200 rounded-lg cursor-pointer hover:bg-indigo-300 w-48 outline-1" type="submit" value="Signup">
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

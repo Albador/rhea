@@ -1,0 +1,38 @@
+{% extends 'core/base.html' %}
+{% block title %}Login{% endblock %}
+{% load widget_tweaks %}
+{% block content %}
+    <div class="flex justify-center items-center mt-5">
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="bg-gray-100 rounded p-6 shadow-sm">
+                {% if form.errors %}
+                    <div class="grid grid-cols-1">
+                        <p class="text-red-700">Your username and password didn't match.</p>
+                    </div>
+                {% endif %}
+                <div class="grid grid-cols-1">
+                    <div class="pt-2 pb-1 text-gray-700">{{ form.username|add_label_class:"" }}</div>
+                    <div class="pb-2">{{ form.username|add_class:"bg-white rounded-sm w-80 text-gray-700"|attr:"type:email" }}</div>
+                    {% if form.username.errors %}
+                        {% for error in form.username.errors %}
+                            <div class="pb-2 text-red-700">{{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="grid grid-cols-1">
+                    <div class="pt-2 pb-1 text-gray-700">{{ form.password|add_label_class:"" }}</div>
+                    <div class="pb-2">{{ form.password|add_class:"bg-white rounded-sm w-80 text-gray-700" }}</div>
+                    {% if form.password.errors %}
+                        {% for error in form.password.errors %}
+                            <div class="pb-2 text-red-700">{{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
+                 </div>
+                <div class="flex justify-center items-center mt-3">
+                    <input class="p-3 bg-indigo-200 rounded-lg cursor-pointer hover:bg-indigo-300 w-48 outline-1" type="submit" value="Login">
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
